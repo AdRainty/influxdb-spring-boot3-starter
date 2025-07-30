@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
  *
  * @author AdRainty
  * @version V1.0.0
- * @description TODO
+ * @description InfluxDBMapperInvocationHandler
  * @since 2025/7/30 16:52:18
  */
 public class InfluxDBMapperInvocationHandler implements InvocationHandler {

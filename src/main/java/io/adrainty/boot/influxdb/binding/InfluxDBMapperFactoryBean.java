@@ -1,5 +1,6 @@
-package io.adrainty.boot.influxdb.registery;
+package io.adrainty.boot.influxdb.binding;
 
+import io.adrainty.boot.influxdb.registery.InfluxDBMapperInvocationHandler;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
@@ -16,7 +17,7 @@ import java.lang.reflect.Proxy;
  */
 
 @SuppressWarnings({"unchecked", "unused"})
-public class InfluxDBMapperFactoryBean<T> implements FactoryBean<T>, InitializingBean{
+public class InfluxDBMapperFactoryBean<T> implements FactoryBean<T>, InitializingBean {
 
     private Class<T> mapperInterface;
 

@@ -13,7 +13,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 
 @Data
-@ConfigurationProperties(prefix = "influxdb.mapper")
+@ConfigurationProperties(prefix = "spring.influx.mapper")
 public class InfluxDBProperties {
 
     private String mapperLocation;

@@ -1,8 +1,6 @@
 package io.adrainty.boot.influxdb.mapper;
 
-import io.adrainty.boot.influxdb.annotation.InfluxDBParam;
-
-import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>InfluxDBMapper</p>
@@ -17,29 +15,13 @@ public interface BaseInfluxDBMapper<T> {
     /**
      * 插入数据
      * @param entity 实体
-     * @return 插入数量
      */
-    int insert(T entity);
+    void insert(T entity);
 
     /**
-     * 根据id删除数据
-     * @param id id
-     * @return 删除数量
+     * 批量插入数据
+     * @param entityList 实体列表
      */
-    int deleteById(Serializable id);
-
-    /**
-     * 根据id更新数据
-     * @param entity 实体
-     * @return 更新数量
-     */
-    int updateById(@InfluxDBParam("entity") T entity);
-
-    /**
-     * 根据id查询数据
-     * @param id id
-     * @return 实体
-     */
-    T selectById(Serializable id);
+    void insertBatch(List<T> entityList);
 
 }
