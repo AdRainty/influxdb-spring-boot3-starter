@@ -1,4 +1,4 @@
-package io.adrainty.boot.influxdb.mapper;
+package io.adrainty.boot.influxdb.binding;
 
 import java.util.List;
 

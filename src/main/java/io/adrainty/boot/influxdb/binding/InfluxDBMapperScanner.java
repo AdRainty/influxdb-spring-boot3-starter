@@ -1,7 +1,6 @@
-package io.adrainty.boot.influxdb.scanner;
+package io.adrainty.boot.influxdb.binding;
 
 import io.adrainty.boot.influxdb.annotation.InfluxDBMapper;
-import io.adrainty.boot.influxdb.binding.InfluxDBMapperFactoryBean;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;

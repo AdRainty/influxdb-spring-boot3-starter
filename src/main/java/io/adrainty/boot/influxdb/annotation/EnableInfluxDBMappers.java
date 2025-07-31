@@ -1,5 +1,6 @@
 package io.adrainty.boot.influxdb.annotation;
 
+import io.adrainty.boot.influxdb.binding.InfluxDBMapperBeanDefinitionRegistrar;
 import io.adrainty.boot.influxdb.configuration.InfluxDBConfig;
 import org.springframework.context.annotation.Import;
 
@@ -14,7 +15,10 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Import(InfluxDBConfig.class)
+@Import({InfluxDBConfig.class, InfluxDBMapperBeanDefinitionRegistrar.class})
 @SuppressWarnings("unused")
 public @interface EnableInfluxDBMappers {
+
+    String[] value() default {};
+
 }

@@ -2,9 +2,8 @@ package io.adrainty.boot.influxdb.mapper;
 
 import io.adrainty.boot.influxdb.annotation.InfluxDBMapper;
 import io.adrainty.boot.influxdb.annotation.InfluxDBParam;
+import io.adrainty.boot.influxdb.binding.BaseInfluxDBMapper;
 import io.adrainty.boot.influxdb.domain.Log;
-
-import java.util.List;
 
 /**
  * @author AdRainty
@@ -13,10 +12,8 @@ import java.util.List;
  */
 
 @InfluxDBMapper
-public interface LogMapper extends BaseInfluxDBMapper<Log>{
+public interface LogMapper extends BaseInfluxDBMapper<Log> {
 
     Log customSelect(@InfluxDBParam(value = "tid") String tid);
-
-    List<Log> customSelect(@InfluxDBParam(value = "start") String start, @InfluxDBParam(value = "end") String end);
 
 }

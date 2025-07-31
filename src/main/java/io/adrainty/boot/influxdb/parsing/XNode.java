@@ -1,5 +1,6 @@
 package io.adrainty.boot.influxdb.parsing;
 
+import lombok.Getter;
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -24,7 +25,9 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class XNode {
 
+    @Getter
     private final Node node;
+    @Getter
     private final String name;
     private final String body;
     private final Properties attributes;
@@ -104,14 +107,6 @@ public class XNode {
 
     public XNode evalNode(String expression) {
         return xpathParser.evalNode(node, expression);
-    }
-
-    public Node getNode() {
-        return node;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getStringBody() {
@@ -247,12 +242,10 @@ public class XNode {
     public List<XNode> getChildren() {
         List<XNode> children = new ArrayList<>();
         NodeList nodeList = node.getChildNodes();
-        if (nodeList != null) {
-            for (int i = 0, n = nodeList.getLength(); i < n; i++) {
-                Node node = nodeList.item(i);
-                if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    children.add(new XNode(xpathParser, node, variables));
-                }
+        for (int i = 0, n = nodeList.getLength(); i < n; i++) {
+            Node node = nodeList.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                children.add(new XNode(xpathParser, node, variables));
             }
         }
         return children;
@@ -286,7 +279,7 @@ public class XNode {
         }
 
         NodeList nodeList = node.getChildNodes();
-        if (nodeList == null || nodeList.getLength() == 0) {
+        if (nodeList.getLength() == 0) {
             builder.append(" />\n");
         } else {
             builder.append(">\n");
@@ -296,8 +289,9 @@ public class XNode {
                 if (nodeType == Node.ELEMENT_NODE) {
                     new XNode(xpathParser, node, variables).buildToString(builder, indentLevel + 1);
                 } else {
-                    String text = getBodyData(node).trim();
-                    if (text.length() > 0) {
+                    String bodyData = getBodyData(node);
+                    String text = bodyData == null? "": bodyData.trim();
+                    if (!text.isEmpty()) {
                         indent(builder, indentLevel + 1).append(text).append("\n");
                     }
                 }
@@ -309,9 +303,7 @@ public class XNode {
     }
 
     private StringBuilder indent(StringBuilder builder, int level) {
-        for (int i = 0; i < level; i++) {
-            builder.append("  ");
-        }
+        builder.append("  ".repeat(Math.max(0, level)));
         return builder;
     }
 

@@ -1,8 +1,0 @@
-spring:
-  influx:
-    url: http://192.168.18.100:8086
-    user: admin
-    password: admin
-    mapper:
-      mapper-base-package: io.adrainty.boot.influxdb.mapper
-      mapper-location: classpath:mapper/influxdb/*.xml

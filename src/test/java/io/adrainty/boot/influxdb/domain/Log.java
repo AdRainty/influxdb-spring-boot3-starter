@@ -17,7 +17,7 @@ import org.influxdb.annotation.Measurement;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Measurement(name = "log")
+@Measurement(name = "log", database = "point_data")
 public class Log {
 
     @Column(name = "tid", tag = true)

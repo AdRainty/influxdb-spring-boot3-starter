@@ -1,6 +1,9 @@
 package io.adrainty.boot.influxdb.binding;
 
-import io.adrainty.boot.influxdb.registery.InfluxDBMapperInvocationHandler;
+import io.adrainty.boot.influxdb.core.InfluxDBBaseExecutor;
+import io.adrainty.boot.influxdb.handler.InfluxDBParameterHandler;
+import io.adrainty.boot.influxdb.handler.InfluxDBResultSetHandler;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
@@ -23,6 +26,17 @@ public class InfluxDBMapperFactoryBean<T> implements FactoryBean<T>, Initializin
 
     private T mapperProxy;
 
+    @Resource
+    private InfluxDBBaseExecutor executor;
+
+    @Resource
+    private InfluxDBParameterHandler parameterHandler;
+
+    @Resource
+    private InfluxDBResultSetHandler resultSetHandler;
+
+    private InfluxDBMapperInvocationHandler handler;
+
     public InfluxDBMapperFactoryBean() {}
 
     public InfluxDBMapperFactoryBean(Class<T> mapperInterface) {
@@ -44,15 +58,20 @@ public class InfluxDBMapperFactoryBean<T> implements FactoryBean<T>, Initializin
         return true;
     }
 
+    public void setRegistry(InfluxDBMapperRegistry registry) {
+        this.handler.setMapperRegistry(registry);
+    }
+
     @Override
     public void afterPropertiesSet() {
         Assert.notNull(mapperInterface, "Mapper interface must not be null");
+        this.handler = new InfluxDBMapperInvocationHandler(executor, parameterHandler, resultSetHandler);
 
         // 创建动态代理
         mapperProxy = (T) Proxy.newProxyInstance(
                 mapperInterface.getClassLoader(),
                 new Class[]{mapperInterface},
-                new InfluxDBMapperInvocationHandler()
+                handler
         );
     }
 }

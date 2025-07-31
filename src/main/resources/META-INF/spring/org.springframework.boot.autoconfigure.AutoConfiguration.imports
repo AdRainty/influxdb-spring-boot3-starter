@@ -1,1 +1,2 @@
 io.adrainty.boot.influxdb.configuration.InfluxDBConfig
+io.adrainty.boot.influxdb.binding.InfluxDBMapperBeanDefinitionRegistrar

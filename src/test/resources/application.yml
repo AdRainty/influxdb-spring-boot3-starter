@@ -1,0 +1,8 @@
+spring:
+  influx:
+    url: http://localhost:8086
+    user: admin
+    password: admin
+influx:
+  mapper:
+    mapper-location: classpath:mapper/influxdb/*.xml
