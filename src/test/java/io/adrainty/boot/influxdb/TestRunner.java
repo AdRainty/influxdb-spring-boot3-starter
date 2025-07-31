@@ -4,13 +4,12 @@ import io.adrainty.boot.influxdb.domain.Log;
 import io.adrainty.boot.influxdb.mapper.LogMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -55,12 +54,9 @@ public class TestRunner {
 
     @Test
     public void testXmlSQL() {
-        LocalDateTime start = LocalDateTime.now().minusDays(1);
-        LocalDateTime end = LocalDateTime.now();
-        List<Log> log = logMapper.customSelect(start.toString(), end.toString());
+        Log log = logMapper.customSelect("123456");
         TestRunner.log.info("testXmlSQL: {}", log);
         Assertions.assertNotNull(log);
     }
-
 
 }
