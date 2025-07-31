@@ -1,16 +1,12 @@
 package io.adrainty.boot.influxdb.binding;
 
 import io.adrainty.boot.influxdb.annotation.EnableInfluxDBMappers;
-import io.adrainty.boot.influxdb.annotation.InfluxDBMapper;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.ClassUtils;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <p>InfluxDBMapperRegistry</p>
@@ -23,14 +19,6 @@ import java.util.Map;
 
 @SuppressWarnings("unused")
 public class InfluxDBMapperBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
-
-    private final Map<Class<?>, InfluxDBMapper> knownMappers;
-
-    private BeanDefinitionRegistry beanRegistry;
-
-    public InfluxDBMapperBeanDefinitionRegistrar() {
-        this.knownMappers = new HashMap<>();
-    }
 
     @Override
     public void registerBeanDefinitions(@NotNull AnnotationMetadata metadata,
@@ -54,12 +42,5 @@ public class InfluxDBMapperBeanDefinitionRegistrar implements ImportBeanDefiniti
         mapperScanner.scan(basePackages);
     }
 
-    public <T> boolean hasMapper(Class<T> type) {
-        return this.knownMappers.containsKey(type);
-    }
-
-    public <T> void addMapper(Class<T> type) {
-        this.knownMappers.put(type, type.getAnnotation(InfluxDBMapper.class));
-    }
 
 }
