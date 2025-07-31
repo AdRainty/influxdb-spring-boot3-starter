@@ -7,6 +7,12 @@ Use influxdb like mybatis & mybatis plus
 - Java 17
 - Springboot 3
 
+## Build
+
+~~~shell
+mvn clean install
+~~~
+
 ## Usage
 
 pom.xml
@@ -19,3 +25,21 @@ pom.xml
 ~~~
 
 [see test case](src/test/java/io/adrainty/boot/influxdb/TestRunner.java)
+
+## Config 
+
+application.yaml
+
+~~~yaml
+spring:
+  influx:
+    url: http://localhost:8086
+    user: admin
+    password: admin
+influx:
+  mapper:
+    mapper-location: classpath:mapper/influxdb/*.xml
+~~~
+
+- `spring.influx`: influxdb config
+- `influx.mapper.mapper-location`: mapper xml location, like mybatis
